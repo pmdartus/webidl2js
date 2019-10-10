@@ -6,4 +6,4 @@ interface _UnderscoredProperties {
   void _operation(sequence<DOMString> _sequence);
 };
 
-UnderscoredProperties implements _MixinMixin;
+UnderscoredProperties includes _MixinMixin;

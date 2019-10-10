@@ -4,4 +4,4 @@ interface Mixin : MixinInherited {
   attribute   DOMString mixinAttr;
   const       byte      mixinConst = 42;
 };
-Mixin implements MixinMixin;
+Mixin includes MixinMixin;
