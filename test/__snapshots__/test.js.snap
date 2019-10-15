@@ -201,6 +201,20 @@ const iface = {
   interface: DOMImplementation,
   expose: {
     Window: { DOMImplementation }
+  },
+
+  install(globalObject) {
+    const DOMImplementation = function() {
+      throw new TypeError(\\"Illegal constructor\\");
+    };
+
+    DOMImplementation.prototype = iface.interface.prototype;
+
+    Object.defineProperty(globalObject, \\"DOMImplementation\\", {
+      configurable: true,
+      writable: true,
+      value: DOMImplementation
+    });
   }
 }; // iface
 module.exports = iface;
@@ -400,6 +414,20 @@ const iface = {
   interface: DictionaryConvert,
   expose: {
     Window: { DictionaryConvert }
+  },
+
+  install(globalObject) {
+    const DictionaryConvert = function() {
+      throw new TypeError(\\"Illegal constructor\\");
+    };
+
+    DictionaryConvert.prototype = iface.interface.prototype;
+
+    Object.defineProperty(globalObject, \\"DictionaryConvert\\", {
+      configurable: true,
+      writable: true,
+      value: DictionaryConvert
+    });
   }
 }; // iface
 module.exports = iface;
@@ -539,6 +567,20 @@ const iface = {
   interface: Enum,
   expose: {
     Window: { Enum }
+  },
+
+  install(globalObject) {
+    const Enum = function() {
+      throw new TypeError(\\"Illegal constructor\\");
+    };
+
+    Enum.prototype = iface.interface.prototype;
+
+    Object.defineProperty(globalObject, \\"Enum\\", {
+      configurable: true,
+      writable: true,
+      value: Enum
+    });
   }
 }; // iface
 module.exports = iface;
@@ -717,6 +759,20 @@ const iface = {
   interface: Global,
   expose: {
     Window: { Global }
+  },
+
+  install(globalObject) {
+    const Global = function() {
+      throw new TypeError(\\"Illegal constructor\\");
+    };
+
+    Global.prototype = iface.interface.prototype;
+
+    Object.defineProperty(globalObject, \\"Global\\", {
+      configurable: true,
+      writable: true,
+      value: Global
+    });
   }
 }; // iface
 module.exports = iface;
@@ -822,6 +878,20 @@ const iface = {
   interface: LegacyArrayClass,
   expose: {
     Window: { LegacyArrayClass }
+  },
+
+  install(globalObject) {
+    const LegacyArrayClass = function() {
+      throw new TypeError(\\"Illegal constructor\\");
+    };
+
+    LegacyArrayClass.prototype = iface.interface.prototype;
+
+    Object.defineProperty(globalObject, \\"LegacyArrayClass\\", {
+      configurable: true,
+      writable: true,
+      value: LegacyArrayClass
+    });
   }
 }; // iface
 module.exports = iface;
@@ -983,6 +1053,25 @@ const iface = {
   interface: MixedIn,
   expose: {
     Window: { MixedIn }
+  },
+
+  install(globalObject) {
+    const MixedIn = function() {
+      throw new TypeError(\\"Illegal constructor\\");
+    };
+
+    Object.defineProperties(MixedIn, {
+      mixedInConst: Object.getOwnPropertyDescriptor(iface.interface, \\"mixedInConst\\"),
+      ifaceMixinConst: Object.getOwnPropertyDescriptor(iface.interface, \\"ifaceMixinConst\\")
+    });
+
+    MixedIn.prototype = iface.interface.prototype;
+
+    Object.defineProperty(globalObject, \\"MixedIn\\", {
+      configurable: true,
+      writable: true,
+      value: MixedIn
+    });
   }
 }; // iface
 module.exports = iface;
@@ -1024,7 +1113,7 @@ class Overloads {
         }
       }
     }
-    return iface.setup(Object.create(new.target.prototype), args);
+    return iface.setup(Object.create(new.target.prototype), args, undefined);
   }
 
   compatible(arg1) {
@@ -1387,6 +1476,41 @@ const iface = {
   interface: Overloads,
   expose: {
     Window: { Overloads }
+  },
+
+  install(globalObject) {
+    const Overloads = function() {
+      const args = [];
+      switch (arguments.length) {
+        case 0:
+          break;
+        default: {
+          let curArg = arguments[0];
+          if (isURL(curArg)) {
+            {
+              let curArg = arguments[0];
+              curArg = convertURL(curArg, { context: \\"Failed to construct 'Overloads': parameter 1\\" });
+              args.push(curArg);
+            }
+          } else {
+            {
+              let curArg = arguments[0];
+              curArg = conversions[\\"DOMString\\"](curArg, { context: \\"Failed to construct 'Overloads': parameter 1\\" });
+              args.push(curArg);
+            }
+          }
+        }
+      }
+      return iface.setup(Object.create(new.target.prototype), args, { globalObject });
+    };
+
+    Overloads.prototype = iface.interface.prototype;
+
+    Object.defineProperty(globalObject, \\"Overloads\\", {
+      configurable: true,
+      writable: true,
+      value: Overloads
+    });
   }
 }; // iface
 module.exports = iface;
@@ -1535,6 +1659,20 @@ const iface = {
   interface: PromiseTypes,
   expose: {
     Window: { PromiseTypes }
+  },
+
+  install(globalObject) {
+    const PromiseTypes = function() {
+      throw new TypeError(\\"Illegal constructor\\");
+    };
+
+    PromiseTypes.prototype = iface.interface.prototype;
+
+    Object.defineProperty(globalObject, \\"PromiseTypes\\", {
+      configurable: true,
+      writable: true,
+      value: PromiseTypes
+    });
   }
 }; // iface
 module.exports = iface;
@@ -1765,6 +1903,20 @@ const iface = {
   interface: Reflect,
   expose: {
     Window: { Reflect }
+  },
+
+  install(globalObject) {
+    const Reflect = function() {
+      throw new TypeError(\\"Illegal constructor\\");
+    };
+
+    Reflect.prototype = iface.interface.prototype;
+
+    Object.defineProperty(globalObject, \\"Reflect\\", {
+      configurable: true,
+      writable: true,
+      value: Reflect
+    });
   }
 }; // iface
 module.exports = iface;
@@ -1818,7 +1970,7 @@ const impl = utils.implSymbol;
 
 class SeqAndRec {
   constructor() {
-    return iface.setup(Object.create(new.target.prototype));
+    return iface.setup(Object.create(new.target.prototype), undefined, undefined);
   }
 
   recordConsumer(rec) {
@@ -2095,6 +2247,20 @@ const iface = {
   interface: SeqAndRec,
   expose: {
     Window: { SeqAndRec }
+  },
+
+  install(globalObject) {
+    const SeqAndRec = function() {
+      return iface.setup(Object.create(new.target.prototype), undefined, { globalObject });
+    };
+
+    SeqAndRec.prototype = iface.interface.prototype;
+
+    Object.defineProperty(globalObject, \\"SeqAndRec\\", {
+      configurable: true,
+      writable: true,
+      value: SeqAndRec
+    });
   }
 }; // iface
 module.exports = iface;
@@ -2231,6 +2397,25 @@ const iface = {
   interface: Static,
   expose: {
     Window: { Static }
+  },
+
+  install(globalObject) {
+    const Static = function() {
+      throw new TypeError(\\"Illegal constructor\\");
+    };
+
+    Object.defineProperties(Static, {
+      def: Object.getOwnPropertyDescriptor(iface.interface, \\"def\\"),
+      abc: Object.getOwnPropertyDescriptor(iface.interface, \\"abc\\")
+    });
+
+    Static.prototype = iface.interface.prototype;
+
+    Object.defineProperty(globalObject, \\"Static\\", {
+      configurable: true,
+      writable: true,
+      value: Static
+    });
   }
 }; // iface
 module.exports = iface;
@@ -2595,6 +2780,20 @@ const iface = {
   interface: Storage,
   expose: {
     Window: { Storage }
+  },
+
+  install(globalObject) {
+    const Storage = function() {
+      throw new TypeError(\\"Illegal constructor\\");
+    };
+
+    Storage.prototype = iface.interface.prototype;
+
+    Object.defineProperty(globalObject, \\"Storage\\", {
+      configurable: true,
+      writable: true,
+      value: Storage
+    });
   }
 }; // iface
 module.exports = iface;
@@ -2707,6 +2906,20 @@ const iface = {
   interface: StringifierAttribute,
   expose: {
     Window: { StringifierAttribute }
+  },
+
+  install(globalObject) {
+    const StringifierAttribute = function() {
+      throw new TypeError(\\"Illegal constructor\\");
+    };
+
+    StringifierAttribute.prototype = iface.interface.prototype;
+
+    Object.defineProperty(globalObject, \\"StringifierAttribute\\", {
+      configurable: true,
+      writable: true,
+      value: StringifierAttribute
+    });
   }
 }; // iface
 module.exports = iface;
@@ -2811,6 +3024,20 @@ const iface = {
   interface: StringifierDefaultOperation,
   expose: {
     Window: { StringifierDefaultOperation }
+  },
+
+  install(globalObject) {
+    const StringifierDefaultOperation = function() {
+      throw new TypeError(\\"Illegal constructor\\");
+    };
+
+    StringifierDefaultOperation.prototype = iface.interface.prototype;
+
+    Object.defineProperty(globalObject, \\"StringifierDefaultOperation\\", {
+      configurable: true,
+      writable: true,
+      value: StringifierDefaultOperation
+    });
   }
 }; // iface
 module.exports = iface;
@@ -2924,6 +3151,20 @@ const iface = {
   interface: StringifierNamedOperation,
   expose: {
     Window: { StringifierNamedOperation }
+  },
+
+  install(globalObject) {
+    const StringifierNamedOperation = function() {
+      throw new TypeError(\\"Illegal constructor\\");
+    };
+
+    StringifierNamedOperation.prototype = iface.interface.prototype;
+
+    Object.defineProperty(globalObject, \\"StringifierNamedOperation\\", {
+      configurable: true,
+      writable: true,
+      value: StringifierNamedOperation
+    });
   }
 }; // iface
 module.exports = iface;
@@ -3028,6 +3269,20 @@ const iface = {
   interface: StringifierOperation,
   expose: {
     Window: { StringifierOperation }
+  },
+
+  install(globalObject) {
+    const StringifierOperation = function() {
+      throw new TypeError(\\"Illegal constructor\\");
+    };
+
+    StringifierOperation.prototype = iface.interface.prototype;
+
+    Object.defineProperty(globalObject, \\"StringifierOperation\\", {
+      configurable: true,
+      writable: true,
+      value: StringifierOperation
+    });
   }
 }; // iface
 module.exports = iface;
@@ -3536,6 +3791,20 @@ const iface = {
   interface: TypedefsAndUnions,
   expose: {
     Window: { TypedefsAndUnions }
+  },
+
+  install(globalObject) {
+    const TypedefsAndUnions = function() {
+      throw new TypeError(\\"Illegal constructor\\");
+    };
+
+    TypedefsAndUnions.prototype = iface.interface.prototype;
+
+    Object.defineProperty(globalObject, \\"TypedefsAndUnions\\", {
+      configurable: true,
+      writable: true,
+      value: TypedefsAndUnions
+    });
   }
 }; // iface
 module.exports = iface;
@@ -3570,7 +3839,7 @@ class URL {
       }
       args.push(curArg);
     }
-    return iface.setup(Object.create(new.target.prototype), args);
+    return iface.setup(Object.create(new.target.prototype), args, undefined);
   }
 
   toJSON() {
@@ -3875,6 +4144,38 @@ const iface = {
   expose: {
     Window: { URL },
     Worker: { URL }
+  },
+
+  install(globalObject) {
+    const URL = function(url) {
+      if (arguments.length < 1) {
+        throw new TypeError(
+          \\"Failed to construct 'URL': 1 argument required, but only \\" + arguments.length + \\" present.\\"
+        );
+      }
+      const args = [];
+      {
+        let curArg = arguments[0];
+        curArg = conversions[\\"USVString\\"](curArg, { context: \\"Failed to construct 'URL': parameter 1\\" });
+        args.push(curArg);
+      }
+      {
+        let curArg = arguments[1];
+        if (curArg !== undefined) {
+          curArg = conversions[\\"USVString\\"](curArg, { context: \\"Failed to construct 'URL': parameter 2\\" });
+        }
+        args.push(curArg);
+      }
+      return iface.setup(Object.create(new.target.prototype), args, { globalObject });
+    };
+
+    URL.prototype = iface.interface.prototype;
+
+    Object.defineProperty(globalObject, \\"URL\\", {
+      configurable: true,
+      writable: true,
+      value: URL
+    });
   }
 }; // iface
 module.exports = iface;
@@ -4164,6 +4465,20 @@ const iface = {
   interface: URLList,
   expose: {
     Window: { URLList }
+  },
+
+  install(globalObject) {
+    const URLList = function() {
+      throw new TypeError(\\"Illegal constructor\\");
+    };
+
+    URLList.prototype = iface.interface.prototype;
+
+    Object.defineProperty(globalObject, \\"URLList\\", {
+      configurable: true,
+      writable: true,
+      value: URLList
+    });
   }
 }; // iface
 module.exports = iface;
@@ -4295,7 +4610,7 @@ class URLSearchParams {
       }
       args.push(curArg);
     }
-    return iface.setup(Object.create(new.target.prototype), args);
+    return iface.setup(Object.create(new.target.prototype), args, undefined);
   }
 
   append(name, value) {
@@ -4601,6 +4916,100 @@ const iface = {
   expose: {
     Window: { URLSearchParams },
     Worker: { URLSearchParams }
+  },
+
+  install(globalObject) {
+    const URLSearchParams = function() {
+      const args = [];
+      {
+        let curArg = arguments[0];
+        if (curArg !== undefined) {
+          if (utils.isObject(curArg)) {
+            if (curArg[Symbol.iterator] !== undefined) {
+              if (!utils.isObject(curArg)) {
+                throw new TypeError(
+                  \\"Failed to construct 'URLSearchParams': parameter 1\\" + \\" sequence\\" + \\" is not an iterable object.\\"
+                );
+              } else {
+                const V = [];
+                const tmp = curArg;
+                for (let nextItem of tmp) {
+                  if (!utils.isObject(nextItem)) {
+                    throw new TypeError(
+                      \\"Failed to construct 'URLSearchParams': parameter 1\\" +
+                        \\" sequence\\" +
+                        \\"'s element\\" +
+                        \\" is not an iterable object.\\"
+                    );
+                  } else {
+                    const V = [];
+                    const tmp = nextItem;
+                    for (let nextItem of tmp) {
+                      nextItem = conversions[\\"USVString\\"](nextItem, {
+                        context:
+                          \\"Failed to construct 'URLSearchParams': parameter 1\\" +
+                          \\" sequence\\" +
+                          \\"'s element\\" +
+                          \\"'s element\\"
+                      });
+
+                      V.push(nextItem);
+                    }
+                    nextItem = V;
+                  }
+
+                  V.push(nextItem);
+                }
+                curArg = V;
+              }
+            } else {
+              if (!utils.isObject(curArg)) {
+                throw new TypeError(
+                  \\"Failed to construct 'URLSearchParams': parameter 1\\" + \\" record\\" + \\" is not an object.\\"
+                );
+              } else {
+                const result = Object.create(null);
+                for (const key of Reflect.ownKeys(curArg)) {
+                  const desc = Object.getOwnPropertyDescriptor(curArg, key);
+                  if (desc && desc.enumerable) {
+                    let typedKey = key;
+
+                    typedKey = conversions[\\"USVString\\"](typedKey, {
+                      context: \\"Failed to construct 'URLSearchParams': parameter 1\\" + \\" record\\" + \\"'s key\\"
+                    });
+
+                    let typedValue = curArg[key];
+
+                    typedValue = conversions[\\"USVString\\"](typedValue, {
+                      context: \\"Failed to construct 'URLSearchParams': parameter 1\\" + \\" record\\" + \\"'s value\\"
+                    });
+
+                    result[typedKey] = typedValue;
+                  }
+                }
+                curArg = result;
+              }
+            }
+          } else {
+            curArg = conversions[\\"USVString\\"](curArg, {
+              context: \\"Failed to construct 'URLSearchParams': parameter 1\\"
+            });
+          }
+        } else {
+          curArg = \\"\\";
+        }
+        args.push(curArg);
+      }
+      return iface.setup(Object.create(new.target.prototype), args, { globalObject });
+    };
+
+    URLSearchParams.prototype = iface.interface.prototype;
+
+    Object.defineProperty(globalObject, \\"URLSearchParams\\", {
+      configurable: true,
+      writable: true,
+      value: URLSearchParams
+    });
   }
 }; // iface
 module.exports = iface;
@@ -4940,6 +5349,20 @@ const iface = {
   interface: URLSearchParamsCollection,
   expose: {
     Window: { URLSearchParamsCollection }
+  },
+
+  install(globalObject) {
+    const URLSearchParamsCollection = function() {
+      throw new TypeError(\\"Illegal constructor\\");
+    };
+
+    URLSearchParamsCollection.prototype = iface.interface.prototype;
+
+    Object.defineProperty(globalObject, \\"URLSearchParamsCollection\\", {
+      configurable: true,
+      writable: true,
+      value: URLSearchParamsCollection
+    });
   }
 }; // iface
 module.exports = iface;
@@ -5255,6 +5678,20 @@ const iface = {
   interface: URLSearchParamsCollection2,
   expose: {
     Window: { URLSearchParamsCollection2 }
+  },
+
+  install(globalObject) {
+    const URLSearchParamsCollection2 = function() {
+      throw new TypeError(\\"Illegal constructor\\");
+    };
+
+    URLSearchParamsCollection2.prototype = iface.interface.prototype;
+
+    Object.defineProperty(globalObject, \\"URLSearchParamsCollection2\\", {
+      configurable: true,
+      writable: true,
+      value: URLSearchParamsCollection2
+    });
   }
 }; // iface
 module.exports = iface;
@@ -5432,6 +5869,25 @@ const iface = {
   interface: UnderscoredProperties,
   expose: {
     Window: { UnderscoredProperties }
+  },
+
+  install(globalObject) {
+    const UnderscoredProperties = function() {
+      throw new TypeError(\\"Illegal constructor\\");
+    };
+
+    Object.defineProperties(UnderscoredProperties, {
+      const: Object.getOwnPropertyDescriptor(iface.interface, \\"const\\"),
+      static: Object.getOwnPropertyDescriptor(iface.interface, \\"static\\")
+    });
+
+    UnderscoredProperties.prototype = iface.interface.prototype;
+
+    Object.defineProperty(globalObject, \\"UnderscoredProperties\\", {
+      configurable: true,
+      writable: true,
+      value: UnderscoredProperties
+    });
   }
 }; // iface
 module.exports = iface;
@@ -5610,6 +6066,20 @@ const iface = {
   interface: Unforgeable,
   expose: {
     Window: { Unforgeable }
+  },
+
+  install(globalObject) {
+    const Unforgeable = function() {
+      throw new TypeError(\\"Illegal constructor\\");
+    };
+
+    Unforgeable.prototype = iface.interface.prototype;
+
+    Object.defineProperty(globalObject, \\"Unforgeable\\", {
+      configurable: true,
+      writable: true,
+      value: Unforgeable
+    });
   }
 }; // iface
 module.exports = iface;
@@ -5895,6 +6365,20 @@ const iface = {
   interface: UnforgeableMap,
   expose: {
     Window: { UnforgeableMap }
+  },
+
+  install(globalObject) {
+    const UnforgeableMap = function() {
+      throw new TypeError(\\"Illegal constructor\\");
+    };
+
+    UnforgeableMap.prototype = iface.interface.prototype;
+
+    Object.defineProperty(globalObject, \\"UnforgeableMap\\", {
+      configurable: true,
+      writable: true,
+      value: UnforgeableMap
+    });
   }
 }; // iface
 module.exports = iface;
@@ -6033,6 +6517,20 @@ const iface = {
   interface: Unscopable,
   expose: {
     Window: { Unscopable }
+  },
+
+  install(globalObject) {
+    const Unscopable = function() {
+      throw new TypeError(\\"Illegal constructor\\");
+    };
+
+    Unscopable.prototype = iface.interface.prototype;
+
+    Object.defineProperty(globalObject, \\"Unscopable\\", {
+      configurable: true,
+      writable: true,
+      value: Unscopable
+    });
   }
 }; // iface
 module.exports = iface;
@@ -6276,6 +6774,20 @@ const iface = {
   interface: Variadic,
   expose: {
     Window: { Variadic }
+  },
+
+  install(globalObject) {
+    const Variadic = function() {
+      throw new TypeError(\\"Illegal constructor\\");
+    };
+
+    Variadic.prototype = iface.interface.prototype;
+
+    Object.defineProperty(globalObject, \\"Variadic\\", {
+      configurable: true,
+      writable: true,
+      value: Variadic
+    });
   }
 }; // iface
 module.exports = iface;
@@ -6294,7 +6806,7 @@ const impl = utils.implSymbol;
 
 class ZeroArgConstructor {
   constructor() {
-    return iface.setup(Object.create(new.target.prototype));
+    return iface.setup(Object.create(new.target.prototype), undefined, undefined);
   }
 }
 Object.defineProperties(ZeroArgConstructor.prototype, {
@@ -6371,6 +6883,20 @@ const iface = {
   interface: ZeroArgConstructor,
   expose: {
     Window: { ZeroArgConstructor }
+  },
+
+  install(globalObject) {
+    const ZeroArgConstructor = function() {
+      return iface.setup(Object.create(new.target.prototype), undefined, { globalObject });
+    };
+
+    ZeroArgConstructor.prototype = iface.interface.prototype;
+
+    Object.defineProperty(globalObject, \\"ZeroArgConstructor\\", {
+      configurable: true,
+      writable: true,
+      value: ZeroArgConstructor
+    });
   }
 }; // iface
 module.exports = iface;
